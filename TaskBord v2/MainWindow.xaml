@@ -25,7 +25,7 @@
                     <StackPanel>
                         <TextBlock Text="{Binding Name}" />
                         <Button Content="+" Click="Button_Click"/>
-                        <ListBox  ItemsSource="{Binding }" HorizontalContentAlignment="Stretch" >
+                        <ListBox  ItemsSource="{Binding Tasks}" HorizontalContentAlignment="Stretch" >
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel>
