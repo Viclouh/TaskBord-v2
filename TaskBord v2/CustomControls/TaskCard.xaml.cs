@@ -21,6 +21,7 @@ namespace TaskBord_v2.CustomControls
     /// </summary>
     public partial class TaskCard : UserControl
     {
+        public bool IsDragDropDisabled { get; set; }
 
         public Task Task
         {
@@ -36,24 +37,18 @@ namespace TaskBord_v2.CustomControls
         {
             InitializeComponent();
         }
+
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
+            if (IsDragDropDisabled)
+            {
+                return;
+            }
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 DragDrop.DoDragDrop(this, this, DragDropEffects.Move);
             }
-        }
-
-        private void ContentControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            
-            (sender as ContentControl).Visibility= Visibility.Collapsed;
-            NameBox.Visibility = Visibility.Visible;
-        }
-        private void DisableDragNDrop()
-        {
-            
-        }
+        }        
     }
 }
