@@ -135,7 +135,36 @@ namespace TaskBord_v2
             }
         }
 
+        protected void CardList_Drop(object sender, DragEventArgs e)
+        {
+            var droppedData = e.Data.GetData(typeof(Card)) as Card;
+            var target = (sender as ListBoxItem).DataContext as Card;
 
+            int targetIndex = CardListControl.Items.IndexOf(target);
+
+            droppedData.Effect = null;
+            droppedData.RenderTransform = null;
+
+            Items.Remove(droppedData);
+            Items.Insert(targetIndex, droppedData);
+
+            // remove the visual feedback drag and drop item
+            if (this._dragdropWindow != null)
+            {
+                this._dragdropWindow.Close();
+                this._dragdropWindow = null;
+            }
+        }
+
+        private void CardList_GiveFeedback(object sender, GiveFeedbackEventArgs e)
+        {
+            // update the position of the visual feedback item
+            Win32Point w32Mouse = new Win32Point();
+            GetCursorPos(ref w32Mouse);
+
+            this._dragdropWindow.Left = w32Mouse.X;
+            this._dragdropWindow.Top = w32Mouse.Y;
+        }
 
         private void CreateDragDropWindow(Visual dragElement)
         {
