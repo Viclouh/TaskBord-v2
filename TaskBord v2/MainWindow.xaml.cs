@@ -42,25 +42,18 @@ namespace TaskBord_v2
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //var list = (sender as Button).DataContext;
 
-            //Task newTask = new Task()
-            //{
-            //    Name = "Новая задача",
-            //    TaskType = ,
-            //    User = GlobalConstants.Context.Users.First()
+            var item = (TaskType)(sender as Button).DataContext;
 
-            //};
+            TaskType type = TaskTypes.Where(x => x.Id == item.Id).First();
 
-            //TaskTypes.Where(x => x.Id == list)
-            //TaskTypes.Tasks.Add(newTask);
-            //GlobalConstants.Context.Task.Add(newTask);
-            //GlobalConstants.Context.SaveChanges();
-           
-            //FillTasks();
-
-            //Types.ItemsSource = null;
-            //Types.ItemsSource = GroupedTasks;
+            Task newTask = new Task()
+            {
+                Name = "Новая задача",
+                TaskType = type,
+                User = GlobalConstants.Context.Users.First()
+            };
+            type.Tasks.Add(newTask);
         }
 
         private void FillTasks()
