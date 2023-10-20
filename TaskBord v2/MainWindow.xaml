@@ -6,77 +6,52 @@
         xmlns:local="clr-namespace:TaskBord_v2"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" MinWidth="300"
-        DataContext="">
+        >
+    <!--<Window.DataContext>
+        <local:MainWindow/>
+    </Window.DataContext>-->
+
 
     <Grid>
-        <!--<Grid Name="Tupes" DataContext="">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.3*" MinWidth="100"/>
-                <ColumnDefinition Width="0.3*" MinWidth="100"/>
-                <ColumnDefinition Width="0.3*" MinWidth="100"/>
-            </Grid.ColumnDefinitions>-->
-            <ItemsControl Name="Types"  >
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel >
-                            <TextBlock Text="{Binding Name}"/>
-                            <ListBox Name="Backlog" HorizontalContentAlignment="Stretch" >
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel>
-                                            <TextBlock  Text="{Binding }"/>
-                                            <TextBlock Text="{Binding User.Name}"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-            <!--<StackPanel Grid.Column="0">
-                <TextBlock Text="Backlog"/>
-                <ListBox Name="Backlog" HorizontalContentAlignment="Stretch" >
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <TextBlock  Text="{Binding Description}"/>
-                                <TextBlock Text="{Binding User.Name}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </StackPanel>
+        <!--<ItemsControl>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>-->
+            <ItemsControl Name="Types" ItemsSource="{Binding Tasks}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Key.Name}" />
+                        <ListBox  ItemsSource="{Binding }" HorizontalContentAlignment="Stretch" >
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock  Text="{Binding Name}"/>
+                                        <TextBlock Text="{Binding Description}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
 
-            <StackPanel Grid.Column="1">
-                <TextBlock Text="Progress"/>
-                <ListBox Name="Progress" HorizontalContentAlignment="Stretch"  >
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <TextBlock  Text="{Binding Description}"/>
-                                <TextBlock Text="{Binding User.Name}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </StackPanel>
-
-            <StackPanel Grid.Column="2">
-                <TextBlock Text="Done"/>
-                <ListBox Name="Done" HorizontalContentAlignment="Stretch" Grid.Column="2">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <TextBlock  Text="{Binding Description}"/>
-                                <TextBlock Text="{Binding User.Name}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </StackPanel>-->
-            
-        <!--</Grid>-->
 
     </Grid>
 </Window>

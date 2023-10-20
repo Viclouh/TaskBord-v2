@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -22,12 +24,17 @@ namespace TaskBord_v2
     /// </summary>
     public partial class MainWindow : Window
     {
+        public ObservableCollection<IGrouping<TaskType,TaskBord.Model.Task>> Tasks { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = this;
+            List<TaskBord.Model.Task> task = GlobalConstants.Context.Task.Include(x=>x.TaskType).ToList();
+            //List<TaskType> types = GlobalConstants.Context.TaskTypes.ToList();
+            Tasks = new ObservableCollection<IGrouping<TaskType, TaskBord.Model.Task>>(task.GroupBy(x => x.TaskType));
+            
 
-            List<TaskType> types = GlobalConstants.Context.TaskTypes.ToList();
-            Types.ItemsSource = types;
 
             //List<Task> backlogs =  GlobalConstants.Context.Task.Include(x => x.User).Where(p=>p.TaskTypeId == 1).ToList();
             //Backlog.ItemsSource = backlogs;
