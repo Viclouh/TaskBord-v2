@@ -21,15 +21,27 @@ namespace TaskBord_v2.CustomControls
     /// </summary>
     public partial class TextBoxBlock : UserControl
     {
-
+        public event EventHandler TextStringChanged;
 
         public string TextString
         {
-            get { return (string)GetValue(TextProperty); }
-            set { SetValue(TextProperty, value); }
+            get { return (string)GetValue(TextStringProperty); }
+            set
+            {
+                SetValue(TextStringProperty, value);
+            }
         }
-        public static readonly DependencyProperty TextProperty =
-            DependencyProperty.Register("TextString", typeof(string), typeof(TextBoxBlock), new PropertyMetadata(""));
+        public static readonly DependencyProperty TextStringProperty =
+            DependencyProperty.Register("TextString", typeof(string), typeof(TextBoxBlock), new PropertyMetadata("", OnTextStringChanged));
+
+        private static void OnTextStringChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is TextBoxBlock textBoxBlock)
+            {
+                textBoxBlock.TextStringChanged?.Invoke(textBoxBlock, EventArgs.Empty);
+            }
+        }
+
 
 
         public bool isFocused
@@ -44,8 +56,6 @@ namespace TaskBord_v2.CustomControls
         {
             InitializeComponent();
         }
-
-
 
         private void ContentControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -66,7 +76,6 @@ namespace TaskBord_v2.CustomControls
         {
             NameBox.Visibility = Visibility.Collapsed;
             NameBlock.Visibility = Visibility.Visible;
-            isFocused = true;
         }
     }
 }

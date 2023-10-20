@@ -49,6 +49,11 @@ namespace TaskBord_v2.CustomControls
             {
                 DragDrop.DoDragDrop(this, this, DragDropEffects.Move);
             }
-        }        
+        }
+
+        private void TextBoxBlock_TextStringChanged(object sender, EventArgs e)
+        {
+            GlobalConstants.Context.SaveChanges();
+        }
     }
 }
