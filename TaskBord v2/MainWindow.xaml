@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:TaskBord_v2"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" MinWidth="300"
-        SourceUpdated="Window_SourceUpdated"
         >
     <!--<Window.DataContext>
         <local:MainWindow/>
@@ -28,7 +27,7 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>-->
-            <ItemsControl Name="Types" ItemsSource="{Binding GroupedTasks}">
+            <ItemsControl x:Name="Types" ItemsSource="{Binding GroupedTasks}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal"/>

@@ -35,10 +35,9 @@ namespace TaskBord_v2
         {
             InitializeComponent();
             this.DataContext = this;
-            List<TaskBord.Model.Task> task = GlobalConstants.Context.Task.Include(x=>x.TaskType).ToList();
-            Tasks = new ObservableCollection<Task>(task);
+            FillTasks();
             ///Tasks = new ObservableCollection<IGrouping<TaskType, TaskBord.Model.Task>>(task.GroupBy(x => x.TaskType));
-            
+
 
 
             //List<Task> backlogs =  GlobalConstants.Context.Task.Include(x => x.User).Where(p=>p.TaskTypeId == 1).ToList();
@@ -64,18 +63,23 @@ namespace TaskBord_v2
             Tasks.Add(newTask);
             GlobalConstants.Context.Task.Add(newTask);
             GlobalConstants.Context.SaveChanges();
-            Refresh();
-            
+            //foreach (var item in GroupedTasks)
+            //{
+            //    if (item.Key.Id == list.Key.Id)
+            //    {
+            //        item.Append(newTask);
+            //    }
+            //}
+            FillTasks();
+
+            Types.ItemsSource = null;
+            Types.ItemsSource = GroupedTasks;
         }
-        private void Window_SourceUpdated(object sender, DataTransferEventArgs e)
-        {
-            Refresh();            
-        }
-        private void Refresh()
+        private void FillTasks()
         {
             List<TaskBord.Model.Task> task = GlobalConstants.Context.Task.Include(x => x.TaskType).ToList();
             Tasks = new ObservableCollection<Task>(task);
-
+            
             //Tasks = new ObservableCollection<IGrouping<TaskType, TaskBord.Model.Task>>(task.GroupBy(x => x.TaskType));
         }
     }
