@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaskBord_v2"
+        xmlns:cc="clr-namespace:TaskBord_v2.CustomControls"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" MinWidth="300"
         >
@@ -22,16 +23,13 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
+                    <StackPanel DragDrop.Drop="StackPanel_Drop" AllowDrop="True" dro>
                         <TextBlock Text="{Binding Name}" />
                         <Button Content="+" Click="Button_Click"/>
                         <ListBox  ItemsSource="{Binding Tasks}" HorizontalContentAlignment="Stretch" >
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <StackPanel>
-                                        <TextBlock  Text="{Binding Name}"/>
-                                        <TextBlock Text="{Binding Description}"/>
-                                    </StackPanel>
+                                    <cc:TaskCard Task="{Binding }"/>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>

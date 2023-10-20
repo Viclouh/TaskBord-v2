@@ -16,16 +16,16 @@ namespace TaskBord_v2
     {
         public App()
         {
-            var context = GlobalConstants.Context;
-            context.TaskTypes.Add(new TaskType
-            {
-                Name = DateTime.Now.ToShortTimeString(),
-                Tasks = new System.Collections.ObjectModel.ObservableCollection<Task>
-                {
-                    new Task { Description = "Test govna", Name = "Test", UserId = 1 }
-                }
-            });
-            context.SaveChanges();
+            //var context = GlobalConstants.Context;
+            //context.TaskTypes.Add(new TaskType
+            //{
+            //    Name = DateTime.Now.ToShortTimeString(),
+            //    Tasks = new System.Collections.ObjectModel.ObservableCollection<Task>
+            //    {
+            //        new Task { Description = "Test govna", Name = "Test", UserId = 1 }
+            //    }
+            //});
+            //context.SaveChanges();
         }
     }
 }
