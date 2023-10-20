@@ -40,6 +40,27 @@ namespace TaskBord_v2
         {
             InitializeComponent();
 
+            
+            listStyle.Setters.Add(new Setter(ListBoxItem.AllowDropProperty, true));
+            listStyle.Setters.Add(new EventSetter(ListBoxItem.PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(CardList_PreviewMouseLeftButtonDown)));
+            listStyle.Setters.Add(new EventSetter(ListBoxItem.DropEvent, new DragEventHandler(CardList_Drop)));
+            listStyle.Setters.Add(new EventSetter(ListBoxItem.GiveFeedbackEvent, new GiveFeedbackEventHandler(CardList_GiveFeedback)));
+
+            CardListControl.ItemContainerStyle = listStyle;
+
+            listStyle.Setters.Add(new Setter(ListBoxItem.AllowDropProperty, true));
+            listStyle.Setters.Add(new EventSetter(ListBoxItem.PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(CardList_PreviewMouseLeftButtonDown)));
+            listStyle.Setters.Add(new EventSetter(ListBoxItem.DropEvent, new DragEventHandler(CardList_Drop)));
+            listStyle.Setters.Add(new EventSetter(ListBoxItem.GiveFeedbackEvent, new GiveFeedbackEventHandler(CardList_GiveFeedback)));
+
+            CardListControl.ItemContainerStyle = listStyle;
+
+            listStyle.Setters.Add(new Setter(ListBoxItem.AllowDropProperty, true));
+            listStyle.Setters.Add(new EventSetter(ListBoxItem.PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(CardList_PreviewMouseLeftButtonDown)));
+            listStyle.Setters.Add(new EventSetter(ListBoxItem.DropEvent, new DragEventHandler(CardList_Drop)));
+            listStyle.Setters.Add(new EventSetter(ListBoxItem.GiveFeedbackEvent, new GiveFeedbackEventHandler(CardList_GiveFeedback)));
+
+            CardListControl.ItemContainerStyle = listStyle;
 
             this.DataContext = this;
             FillTasks();
@@ -47,8 +68,12 @@ namespace TaskBord_v2
         }
 
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
+      
+        private readonly Style listStyle = null;
+
+        private readonly Style listStyle = null;
+
+        private readonly Style listStyle = null;
 
             var item = (TaskType)(sender as Button).DataContext;
 
@@ -59,9 +84,6 @@ namespace TaskBord_v2
                 Name = "Новая задача",
                 TaskType = type,
                 User = GlobalConstants.Context.Users.First()
-            };
-            type.Tasks.Add(newTask);
-        }
 
         private void FillTasks()
         {
@@ -69,7 +91,8 @@ namespace TaskBord_v2
         }
 
 
-
+    
+            _dragdropWindow.ShowInTaskbar = false;
 
         private void StackPanel_Drop(object sender, DragEventArgs e)
         {
@@ -85,12 +108,27 @@ namespace TaskBord_v2
 
 
 
+
+            // remove the visual feedback drag and drop item
+            //if (this._dragdropWindow != null)
+            //{
+            //    this._dragdropWindow.Close();
+            //    this._dragdropWindow = null;
+            //}
+            //{
+            //    this._dragdropWindow.Close();
+            //    this._dragdropWindow = null;
+            //}
         }
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static extern bool GetCursorPos(ref Win32Point pt);
 
-
-  
-
-      
-
+        [StructLayout(LayoutKind.Sequential)]
+        internal struct Win32Point
+        {
+            public Int32 X;
+            public Int32 Y;
+        };
     }
 }
