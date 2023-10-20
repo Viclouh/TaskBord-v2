@@ -6,10 +6,20 @@
              xmlns:local="clr-namespace:TaskBord_v2.CustomControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <Grid Background="White">
         <StackPanel>
-            <TextBlock  Text="{Binding Name}"/>
+            <Grid>
+            <ContentControl x:Name="NameBlock" MouseDoubleClick="ContentControl_MouseDoubleClick">
+                <TextBlock Text="{Binding Name}"/>
+            </ContentControl>
+
+                <ContentControl x:Name="NameBox" Visibility="Collapsed">
+                    <TextBox Text="{Binding Name}"/>
+            </ContentControl>
+            </Grid>
+            
             <TextBlock Text="{Binding Description}"/>
+            <TextBox Text="{Binding Name}"/>
         </StackPanel>
     </Grid>
 </UserControl>

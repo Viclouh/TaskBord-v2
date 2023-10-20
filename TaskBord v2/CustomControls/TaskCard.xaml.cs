@@ -44,5 +44,16 @@ namespace TaskBord_v2.CustomControls
                 DragDrop.DoDragDrop(this, this, DragDropEffects.Move);
             }
         }
+
+        private void ContentControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            
+            (sender as ContentControl).Visibility= Visibility.Collapsed;
+            NameBox.Visibility = Visibility.Visible;
+        }
+        private void DisableDragNDrop()
+        {
+            
+        }
     }
 }

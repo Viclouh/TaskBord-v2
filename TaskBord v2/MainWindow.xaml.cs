@@ -40,6 +40,27 @@ namespace TaskBord_v2
         {
             InitializeComponent();
 
+            
+            listStyle.Setters.Add(new Setter(ListBoxItem.AllowDropProperty, true));
+            listStyle.Setters.Add(new EventSetter(ListBoxItem.PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(CardList_PreviewMouseLeftButtonDown)));
+            listStyle.Setters.Add(new EventSetter(ListBoxItem.DropEvent, new DragEventHandler(CardList_Drop)));
+            listStyle.Setters.Add(new EventSetter(ListBoxItem.GiveFeedbackEvent, new GiveFeedbackEventHandler(CardList_GiveFeedback)));
+
+            CardListControl.ItemContainerStyle = listStyle;
+
+            listStyle.Setters.Add(new Setter(ListBoxItem.AllowDropProperty, true));
+            listStyle.Setters.Add(new EventSetter(ListBoxItem.PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(CardList_PreviewMouseLeftButtonDown)));
+            listStyle.Setters.Add(new EventSetter(ListBoxItem.DropEvent, new DragEventHandler(CardList_Drop)));
+            listStyle.Setters.Add(new EventSetter(ListBoxItem.GiveFeedbackEvent, new GiveFeedbackEventHandler(CardList_GiveFeedback)));
+
+            CardListControl.ItemContainerStyle = listStyle;
+
+            listStyle.Setters.Add(new Setter(ListBoxItem.AllowDropProperty, true));
+            listStyle.Setters.Add(new EventSetter(ListBoxItem.PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(CardList_PreviewMouseLeftButtonDown)));
+            listStyle.Setters.Add(new EventSetter(ListBoxItem.DropEvent, new DragEventHandler(CardList_Drop)));
+            listStyle.Setters.Add(new EventSetter(ListBoxItem.GiveFeedbackEvent, new GiveFeedbackEventHandler(CardList_GiveFeedback)));
+
+            CardListControl.ItemContainerStyle = listStyle;
 
             this.DataContext = this;
             FillTasks();
@@ -47,8 +68,12 @@ namespace TaskBord_v2
         }
 
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
+      
+        private readonly Style listStyle = null;
+
+        private readonly Style listStyle = null;
+
+        private readonly Style listStyle = null;
 
             var item = (TaskType)(sender as Button).DataContext;
 
@@ -59,53 +84,38 @@ namespace TaskBord_v2
                 Name = "Новая задача",
                 TaskType = type,
                 User = GlobalConstants.Context.Users.First()
-            };
-            type.Tasks.Add(newTask);
+
+         
         }
 
-        private void FillTasks()
+
+    
+            _dragdropWindow.ShowInTaskbar = false;
+
+            Rectangle r = new Rectangle();
+            r.Width = ((FrameworkElement)dragElement).ActualWidth;
+            r.Height = ((FrameworkElement)dragElement).ActualHeight;
+            r.Fill = new VisualBrush(dragElement);
+            this._dragdropWindow.Content = r;
+
+
+            Win32Point w32Mouse = new Win32Point();
+            GetCursorPos(ref w32Mouse);
+
+
+            this._dragdropWindow.Left = w32Mouse.X;
+            this._dragdropWindow.Top = w32Mouse.Y;
+            this._dragdropWindow.Show();
+        }
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static extern bool GetCursorPos(ref Win32Point pt);
+
+        [StructLayout(LayoutKind.Sequential)]
+        internal struct Win32Point
         {
-            TaskTypes = new ObservableCollection<TaskType>(GlobalConstants.Context.TaskTypes.Include(x => x.Tasks));
-        }
-
-
-
-
-        private void StackPanel_Drop(object sender, DragEventArgs e)
-        {
-            var type = (TaskType)(sender as StackPanel).DataContext;
-            
-            TaskCard draggedItem = e.Data.GetData(typeof(TaskCard)) as TaskCard;
-            
-            if (draggedItem == null) {
-                throw new Exception();
-            }
-            draggedItem.Task.TaskType = type;
-            GlobalConstants.Context.SaveChanges();
-
-
-
-            //var droppedData = e.Data.GetData(typeof(TaskCard)) as TaskCard;
-            //var target = (sender as StackPanel).DataContext as StackPanel;
-
-            //int targetIndex = CardListControl.Items.IndexOf(target);
-
-            //droppedData.Effect = null;
-            //droppedData.RenderTransform = null;
-
-
-            // remove the visual feedback drag and drop item
-            //if (this._dragdropWindow != null)
-            //{
-            //    this._dragdropWindow.Close();
-            //    this._dragdropWindow = null;
-            //}
-        }
-
-
-  
-
-      
-
+            public Int32 X;
+            public Int32 Y;
+        };
     }
 }
