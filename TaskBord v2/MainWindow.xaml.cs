@@ -66,20 +66,20 @@ namespace TaskBord_v2
 
         private void FillTasks()
         {
-            TaskTypes = new ObservableCollection<TaskType>(GlobalConstants.Context.TaskTypes.Include(x => x.Tasks ).ThenInclude(Tasks=>Tasks.User));
+            TaskTypes = new ObservableCollection<TaskType>(GlobalConstants.Context.TaskTypes.Include(x => x.Tasks));
         }
 
 
 
-        }
 
         private void StackPanel_Drop(object sender, DragEventArgs e)
         {
             var type = (TaskType)(sender as StackPanel).DataContext;
-            
+
             TaskCard draggedItem = e.Data.GetData(typeof(TaskCard)) as TaskCard;
-            
-            if (draggedItem == null) {
+
+            if (draggedItem == null)
+            {
                 throw new Exception();
             }
             draggedItem.Task.TaskType = type;
@@ -87,21 +87,12 @@ namespace TaskBord_v2
 
 
 
-
-            // remove the visual feedback drag and drop item
-            //if (this._dragdropWindow != null)
-            //{
-            //    this._dragdropWindow.Close();
-            //    this._dragdropWindow = null;
-            //}
-            //{
-            //    this._dragdropWindow.Close();
-            //    this._dragdropWindow = null;
-            //}
         }
-        [DllImport("user32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool GetCursorPos(ref Win32Point pt);
+
+
+
+
+
 
     }
 }
