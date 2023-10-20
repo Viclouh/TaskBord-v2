@@ -13,20 +13,7 @@
 
 
     <Grid>
-        <!--<ItemsControl>
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        
-                    </StackPanel>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>-->
+        
             <ItemsControl x:Name="Types" ItemsSource="{Binding TaskTypes}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -36,7 +23,7 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock Text="{Binding Tasks}" />
+                        <TextBlock Text="{Binding Name}" />
                         <Button Content="+" Click="Button_Click"/>
                         <ListBox  ItemsSource="{Binding }" HorizontalContentAlignment="Stretch" >
                             <ListBox.ItemTemplate>

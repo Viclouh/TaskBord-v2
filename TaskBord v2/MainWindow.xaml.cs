@@ -29,65 +29,43 @@ namespace TaskBord_v2
     public partial class MainWindow : Window
     {
         private ObservableCollection<TaskType> _taskTypes;
-
-        public ObservableCollection<IGrouping<TaskType, TaskBord.Model.Task>> GroupedTasks { get => new ObservableCollection<IGrouping<TaskType, TaskBord.Model.Task>>(Tasks.GroupBy(x => x.TaskType)); }
-        private ObservableCollection<Task> Tasks { get; set; }
-
         public ObservableCollection<TaskType> TaskTypes { get => _taskTypes; set => _taskTypes = value; }
+
         public MainWindow()
         {
             InitializeComponent();
             this.DataContext = this;
             FillTasks();
-            TaskTypes = new ObservableCollection<TaskType>(GlobalConstants.Context.TaskTypes.Include(x => x.Tasks));
             
-
-
-            ///Tasks = new ObservableCollection<IGrouping<TaskType, TaskBord.Model.Task>>(task.GroupBy(x => x.TaskType));
-
-
-
-            //List<Task> backlogs =  GlobalConstants.Context.Task.Include(x => x.User).Where(p=>p.TaskTypeId == 1).ToList();
-            //Backlog.ItemsSource = backlogs;
-            //List<Task>progress  = GlobalConstants.Context.Task.Include(x => x.User).Where(p => p.TaskTypeId == 2).ToList();
-            //Progress.ItemsSource = progress;
-            //List<Task> done = GlobalConstants.Context.Task.Include(x => x.User).Where(p => p.TaskTypeId == 3).ToList();
-            //Done.ItemsSource = done;
-
         }
 
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var list = (IGrouping<TaskType, TaskBord.Model.Task>)(sender as Button).DataContext;
-            Task newTask = new Task()
-            {
-                Name = "Новая задача",
-                TaskType = list.Key,
-                User = GlobalConstants.Context.Users.First()
+            //var list = (sender as Button).DataContext;
 
-            };
-            Tasks.Add(newTask);
-            GlobalConstants.Context.Task.Add(newTask);
-            GlobalConstants.Context.SaveChanges();
-            //foreach (var item in GroupedTasks)
+            //Task newTask = new Task()
             //{
-            //    if (item.Key.Id == list.Key.Id)
-            //    {
-            //        item.Append(newTask);
-            //    }
-            //}
-            FillTasks();
+            //    Name = "Новая задача",
+            //    TaskType = ,
+            //    User = GlobalConstants.Context.Users.First()
 
-            Types.ItemsSource = null;
-            Types.ItemsSource = GroupedTasks;
+            //};
+
+            //TaskTypes.Where(x => x.Id == list)
+            //TaskTypes.Tasks.Add(newTask);
+            //GlobalConstants.Context.Task.Add(newTask);
+            //GlobalConstants.Context.SaveChanges();
+           
+            //FillTasks();
+
+            //Types.ItemsSource = null;
+            //Types.ItemsSource = GroupedTasks;
         }
+
         private void FillTasks()
         {
-            List<TaskBord.Model.Task> task = GlobalConstants.Context.Task.Include(x => x.TaskType).ToList();
-            Tasks = new ObservableCollection<Task>(task);
-
-            //Tasks = new ObservableCollection<IGrouping<TaskType, TaskBord.Model.Task>>(task.GroupBy(x => x.TaskType));
+            TaskTypes = new ObservableCollection<TaskType>(GlobalConstants.Context.TaskTypes.Include(x => x.Tasks));
         }
     }
 }
