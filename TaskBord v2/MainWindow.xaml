@@ -23,25 +23,27 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Border Width="300px" CornerRadius="10" x:Name="myBorder" Margin="10 0 10 40" Background="#fff">
+                    <Border Width="300px" CornerRadius="10" x:Name="myBorder" Margin="10 0 10 40" Background="#fff"  >
                         <StackPanel VerticalAlignment="Stretch" Margin="10 0 10 10">
                             <TextBlock Text="{Binding Name}" />
                             <Button Content="+" Click="Button_Click"/>
-                            <Border  Background="white">
-                            <ScrollViewer>
-                                <StackPanel>
-                                    <ListBox ItemsSource="{Binding Tasks}" Height="{Binding ElementName=myBorder, Path=ActualHeight}">
-                                        <ListBox.ItemTemplate>
+                            <Border  Background="white" >
+                                <StackPanel DragDrop.Drop="StackPanel_Drop" AllowDrop="True">
+                                    <ItemsControl ItemsSource="{Binding Tasks}" Height="{Binding ElementName=myBorder, Path=ActualHeight}">
+                                        <ItemsControl.Template>
+                                            <ControlTemplate>
+                                                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                                    <ItemsPresenter/>
+                                                </ScrollViewer>
+                                            </ControlTemplate>
+                                        </ItemsControl.Template>
+                                        <ItemsControl.ItemTemplate>
                                             <DataTemplate>
-                                                <StackPanel>
-                                                    <TextBlock  Text="{Binding Name}" TextWrapping="WrapWithOverflow"/>
-                                                    <TextBlock Text="{Binding Description}" TextWrapping="WrapWithOverflow" />
-                                                </StackPanel>
+                                                <cc:TaskCard Task="{Binding }"/>
                                             </DataTemplate>
-                                        </ListBox.ItemTemplate>
-                                    </ListBox>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
                                 </StackPanel>
-                            </ScrollViewer>
                             </Border>
                         </StackPanel>
                     </Border>

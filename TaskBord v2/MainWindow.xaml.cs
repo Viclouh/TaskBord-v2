@@ -40,13 +40,6 @@ namespace TaskBord_v2
         {
             InitializeComponent();
 
-            listStyle = new Style(typeof(ListBoxItem));
-            listStyle.Setters.Add(new Setter(ListBoxItem.AllowDropProperty, true));
-            listStyle.Setters.Add(new EventSetter(ListBoxItem.PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(CardList_PreviewMouseLeftButtonDown)));
-            listStyle.Setters.Add(new EventSetter(ListBoxItem.DropEvent, new DragEventHandler(CardList_Drop)));
-            listStyle.Setters.Add(new EventSetter(ListBoxItem.GiveFeedbackEvent, new GiveFeedbackEventHandler(CardList_GiveFeedback)));
-
-            CardListControl.ItemContainerStyle = listStyle;
 
             this.DataContext = this;
             FillTasks();
@@ -75,8 +68,7 @@ namespace TaskBord_v2
             TaskTypes = new ObservableCollection<TaskType>(GlobalConstants.Context.TaskTypes.Include(x => x.Tasks));
         }
 
-        private Window _dragdropWindow = null;
-        private readonly Style listStyle = null;
+
 
 
         private void StackPanel_Drop(object sender, DragEventArgs e)
@@ -103,105 +95,17 @@ namespace TaskBord_v2
 
 
             // remove the visual feedback drag and drop item
-            if (this._dragdropWindow != null)
-            {
-                this._dragdropWindow.Close();
-                this._dragdropWindow = null;
-            }
+            //if (this._dragdropWindow != null)
+            //{
+            //    this._dragdropWindow.Close();
+            //    this._dragdropWindow = null;
+            //}
         }
 
 
-        protected void CardList_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (sender is ListBoxItem)
-            {
-                var draggedItem = sender as ListBoxItem;
-                var card = draggedItem.DataContext as TaskCard;
+  
 
-                card.Effect = new DropShadowEffect
-                {
-                    Color = new Color { A = 50, R = 0, G = 0, B = 0 },
-                    Direction = 320,
-                    ShadowDepth = 0,
-                    Opacity = .75,
-                };
-                card.RenderTransform = new RotateTransform(2.0, 300, 200);
+      
 
-                draggedItem.IsSelected = true;
-
-                // create the visual feedback drag and drop item
-                CreateDragDropWindow(card);
-                DragDrop.DoDragDrop(draggedItem, draggedItem.DataContext, DragDropEffects.Move);
-            }
-        }
-
-        protected void CardList_Drop(object sender, DragEventArgs e)
-        {
-            var droppedData = e.Data.GetData(typeof(Card)) as Card;
-            var target = (sender as ListBoxItem).DataContext as Card;
-
-            int targetIndex = CardListControl.Items.IndexOf(target);
-
-            droppedData.Effect = null;
-            droppedData.RenderTransform = null;
-
-            Items.Remove(droppedData);
-            Items.Insert(targetIndex, droppedData);
-
-            // remove the visual feedback drag and drop item
-            if (this._dragdropWindow != null)
-            {
-                this._dragdropWindow.Close();
-                this._dragdropWindow = null;
-            }
-        }
-
-        private void CardList_GiveFeedback(object sender, GiveFeedbackEventArgs e)
-        {
-            // update the position of the visual feedback item
-            Win32Point w32Mouse = new Win32Point();
-            GetCursorPos(ref w32Mouse);
-
-            this._dragdropWindow.Left = w32Mouse.X;
-            this._dragdropWindow.Top = w32Mouse.Y;
-        }
-
-        private void CreateDragDropWindow(Visual dragElement)
-        {
-            this._dragdropWindow = new Window();
-            _dragdropWindow.WindowStyle = WindowStyle.None;
-            _dragdropWindow.AllowsTransparency = true;
-            _dragdropWindow.AllowDrop = false;
-            _dragdropWindow.Background = null;
-            _dragdropWindow.IsHitTestVisible = false;
-            _dragdropWindow.SizeToContent = SizeToContent.WidthAndHeight;
-            _dragdropWindow.Topmost = true;
-            _dragdropWindow.ShowInTaskbar = false;
-
-            Rectangle r = new Rectangle();
-            r.Width = ((FrameworkElement)dragElement).ActualWidth;
-            r.Height = ((FrameworkElement)dragElement).ActualHeight;
-            r.Fill = new VisualBrush(dragElement);
-            this._dragdropWindow.Content = r;
-
-
-            Win32Point w32Mouse = new Win32Point();
-            GetCursorPos(ref w32Mouse);
-
-
-            this._dragdropWindow.Left = w32Mouse.X;
-            this._dragdropWindow.Top = w32Mouse.Y;
-            this._dragdropWindow.Show();
-        }
-        [DllImport("user32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool GetCursorPos(ref Win32Point pt);
-
-        [StructLayout(LayoutKind.Sequential)]
-        internal struct Win32Point
-        {
-            public Int32 X;
-            public Int32 Y;
-        };
     }
 }
