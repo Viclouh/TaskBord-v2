@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TaskBord_v2"
         xmlns:cc="clr-namespace:TaskBord_v2.CustomControls"
         mc:Ignorable="d"
-        Title="MainWindow" Background="#c3ffff" Height="450" Width="800" MinWidth="300"
+        Title="MainWindow" Background="#e6e6e6" Height="450" Width="800" MinWidth="300"
         >
     <!--<Window.DataContext>
         <local:MainWindow/>
@@ -26,7 +26,9 @@
                     <Border Width="300px" CornerRadius="10" x:Name="myBorder" Margin="10 0 10 40" Background="#fff"  >
                         <StackPanel VerticalAlignment="Stretch" Margin="10 0 10 10">
                             <TextBlock Text="{Binding Name}" />
-                            <Button Content="+" Click="Button_Click"/>
+                            <Border CornerRadius="5" BorderThickness="1" BorderBrush="#e6e6e6" Margin="5" >
+                                <Button Content="+" Click="Button_Click" BorderThickness="0" Background="Transparent" Margin="5"/>
+                            </Border>
                             <Border  Background="white" >
                                 <StackPanel DragDrop.Drop="StackPanel_Drop" AllowDrop="True">
                                     <ItemsControl ItemsSource="{Binding Tasks}" Height="{Binding ElementName=myBorder, Path=ActualHeight}">

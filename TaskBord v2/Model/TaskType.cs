@@ -15,6 +15,7 @@ namespace TaskBord.Model
         public int Id { get; set; }
         public string Name { get; set; }
         public ObservableCollection<Task> Tasks { get; set;}
+            
     }
 
 

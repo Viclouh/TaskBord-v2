@@ -65,7 +65,7 @@ namespace TaskBord_v2
 
         private void FillTasks()
         {
-            TaskTypes = new ObservableCollection<TaskType>(GlobalConstants.Context.TaskTypes.Include(x => x.Tasks));
+            TaskTypes = new ObservableCollection<TaskType>(GlobalConstants.Context.TaskTypes.Include(x => x.Tasks ).ThenInclude(Tasks=>Tasks.User));
         }
 
 
@@ -85,21 +85,6 @@ namespace TaskBord_v2
 
 
 
-            //var droppedData = e.Data.GetData(typeof(TaskCard)) as TaskCard;
-            //var target = (sender as StackPanel).DataContext as StackPanel;
-
-            //int targetIndex = CardListControl.Items.IndexOf(target);
-
-            //droppedData.Effect = null;
-            //droppedData.RenderTransform = null;
-
-
-            // remove the visual feedback drag and drop item
-            //if (this._dragdropWindow != null)
-            //{
-            //    this._dragdropWindow.Close();
-            //    this._dragdropWindow = null;
-            //}
         }
 
 
