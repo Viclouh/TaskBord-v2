@@ -30,6 +30,7 @@ namespace TaskBord
                 new TaskType() {  Id = 1, Name = "backlog" },
                 new TaskType() {  Id = 2, Name = "in progress" },
                 new TaskType() {  Id = 3, Name = "done" }
+
                 );
             modelBuilder.Entity<User>().HasData(
                 new User() { Id = 1, Name = "user1", Password = "user1" },
@@ -44,7 +45,8 @@ namespace TaskBord
                 new Task() { Id = 6, Name = "task6", TaskTypeId = 2, UserId = 2, Description = "desxription2" },
                 new Task() { Id = 7, Name = "task7", TaskTypeId = 3, UserId = 1, Description = "desxription3" },
                 new Task() { Id = 8, Name = "task8", TaskTypeId = 3, UserId = 2, Description = "desxription3" },
-                new Task() { Id = 9, Name = "task9", TaskTypeId = 3, UserId = 1, Description = "desxription3" }
+                new Task() { Id = 9, Name = "task9", TaskTypeId = 3, UserId = 1, Description = "desxription3" },
+                new Task() { Id = 10, Name = "task10", TaskTypeId = 3, UserId = 1, Description = "desxription3" }
                 );
 
         }

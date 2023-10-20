@@ -28,14 +28,21 @@ namespace TaskBord_v2
     /// </summary>
     public partial class MainWindow : Window
     {
-        public ObservableCollection<IGrouping<TaskType,TaskBord.Model.Task>> GroupedTasks { get => new ObservableCollection<IGrouping<TaskType, TaskBord.Model.Task>>(Tasks.GroupBy(x => x.TaskType)); }
+        private ObservableCollection<TaskType> _taskTypes;
+
+        public ObservableCollection<IGrouping<TaskType, TaskBord.Model.Task>> GroupedTasks { get => new ObservableCollection<IGrouping<TaskType, TaskBord.Model.Task>>(Tasks.GroupBy(x => x.TaskType)); }
         private ObservableCollection<Task> Tasks { get; set; }
 
+        public ObservableCollection<TaskType> TaskTypes { get => _taskTypes; set => _taskTypes = value; }
         public MainWindow()
         {
             InitializeComponent();
             this.DataContext = this;
             FillTasks();
+            TaskTypes = new ObservableCollection<TaskType>(GlobalConstants.Context.TaskTypes.Include(x => x.Tasks));
+            
+
+
             ///Tasks = new ObservableCollection<IGrouping<TaskType, TaskBord.Model.Task>>(task.GroupBy(x => x.TaskType));
 
 
@@ -79,7 +86,7 @@ namespace TaskBord_v2
         {
             List<TaskBord.Model.Task> task = GlobalConstants.Context.Task.Include(x => x.TaskType).ToList();
             Tasks = new ObservableCollection<Task>(task);
-            
+
             //Tasks = new ObservableCollection<IGrouping<TaskType, TaskBord.Model.Task>>(task.GroupBy(x => x.TaskType));
         }
     }

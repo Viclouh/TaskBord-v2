@@ -27,7 +27,7 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>-->
-            <ItemsControl x:Name="Types" ItemsSource="{Binding GroupedTasks}">
+            <ItemsControl x:Name="Types" ItemsSource="{Binding TaskTypes}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal"/>
@@ -36,7 +36,7 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock Text="{Binding Key.Name}" />
+                        <TextBlock Text="{Binding Tasks}" />
                         <Button Content="+" Click="Button_Click"/>
                         <ListBox  ItemsSource="{Binding }" HorizontalContentAlignment="Stretch" >
                             <ListBox.ItemTemplate>
