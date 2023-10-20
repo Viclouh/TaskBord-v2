@@ -53,7 +53,7 @@ namespace TaskBord
 
         public MainContext()
         {
-            Database.EnsureDeleted();
+            //Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 
