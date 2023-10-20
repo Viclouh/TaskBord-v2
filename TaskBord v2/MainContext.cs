@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Media;
 
 using TaskBord.Model;
 
@@ -27,9 +28,9 @@ namespace TaskBord
         {
 
             modelBuilder.Entity<TaskType>().HasData(
-                new TaskType() {  Id = 1, Name = "backlog" },
-                new TaskType() {  Id = 2, Name = "in progress" },
-                new TaskType() {  Id = 3, Name = "done" }
+                new TaskType() {  Id = 1, Name = "backlog" ,/* Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#69f"))*/ },
+                new TaskType() {  Id = 2, Name = "in progress",/* Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#fc6"))*/ },
+                new TaskType() {  Id = 3, Name = "done",/* Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#6c6"))*/ }
 
                 );
             modelBuilder.Entity<User>().HasData(
@@ -53,7 +54,7 @@ namespace TaskBord
 
         public MainContext()
         {
-            //Database.EnsureDeleted();
+            Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 

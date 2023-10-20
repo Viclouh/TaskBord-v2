@@ -55,5 +55,12 @@ namespace TaskBord_v2.CustomControls
         {
             GlobalConstants.Context.SaveChanges();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            GlobalConstants.Context.Task.Remove(Task);
+            GlobalConstants.Context.SaveChanges();
+
+        }
     }
 }
