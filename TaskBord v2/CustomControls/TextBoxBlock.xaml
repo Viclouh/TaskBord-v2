@@ -8,10 +8,10 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <ContentControl x:Name="NameBlock" MouseDoubleClick="ContentControl_MouseDoubleClick">
-            <TextBlock Text="{Binding TextString, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+            <TextBlock Text="{Binding TextString, RelativeSource={RelativeSource AncestorType=UserControl}}" TextWrapping="Wrap"/>
         </ContentControl>
 
-        <TextBox x:Name="NameBox" Visibility="Collapsed" Text="{Binding TextString, RelativeSource={RelativeSource AncestorType=UserControl}}" LostFocus="TextBox_LostFocus"/>
+        <TextBox x:Name="NameBox" Visibility="Collapsed" Text="{Binding TextString, RelativeSource={RelativeSource AncestorType=UserControl}}" LostFocus="TextBox_LostFocus" TextWrapping="Wrap"/>
 
     </Grid>
 </UserControl>
