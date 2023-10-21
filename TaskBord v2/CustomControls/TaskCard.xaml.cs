@@ -47,6 +47,7 @@ namespace TaskBord_v2.CustomControls
             }
             if (e.LeftButton == MouseButtonState.Pressed)
             {
+                
                 DragDrop.DoDragDrop(this, this, DragDropEffects.Move);
             }
         }

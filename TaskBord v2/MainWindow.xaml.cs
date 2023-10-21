@@ -40,15 +40,7 @@ namespace TaskBord_v2
         public MainWindow()
         {
             InitializeComponent();
-            SolidColorBrush[] solidColorBrushes = {
-                new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4f9ce8")),
-                new SolidColorBrush((Color)ColorConverter.ConvertFromString("#f4c650")),
-                new SolidColorBrush((Color)ColorConverter.ConvertFromString("#5dbf61")),
-                new SolidColorBrush((Color)ColorConverter.ConvertFromString("#fb9902")),
-                new SolidColorBrush((Color)ColorConverter.ConvertFromString("#fffc31")),
-                new SolidColorBrush((Color)ColorConverter.ConvertFromString("#62b42c")),
-                new SolidColorBrush((Color)ColorConverter.ConvertFromString("#8305b1"))
-            };
+
 
 
             this.DataContext = this;
